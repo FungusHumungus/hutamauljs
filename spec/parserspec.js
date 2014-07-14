@@ -20,4 +20,16 @@ describe('Parser', function() {
                                      '--ponk');
   });
 
+  it('parses multiple nodes per branch', function() {
+      
+      var ast = parser('<div>ook<span>ponk</span>wonkle</div>');
+
+      expect(ast.toString()).toEqual('-<div>' + 
+                                     '--ook' + 
+                                     '--<span>' +
+                                     '---ponk' +
+                                     '--wonkle');
+
+  });
+
 });

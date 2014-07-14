@@ -34,4 +34,11 @@ describe('tokenizer', function() {
 
   });
 
+  it('tokenizes tags with attributes', function() {
+
+    var tokens = tokenizer('<wonk arg="sponk" onk="ponk"></wonk>');
+    expect(tokens()).toEqual({content: '<wonk arg="sponk" onk="ponk">', type: 'tag'});
+
+  });
+
 });
