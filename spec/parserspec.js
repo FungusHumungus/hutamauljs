@@ -10,4 +10,14 @@ describe('Parser', function() {
                                    '--ook');
   });
 
+  it('parses multiple div blocks', function() {
+
+      var ast = parser('<div>ook</div><div>ponk</div>');
+
+      expect(ast.toString()).toEqual('-<div>' + 
+                                     '--ook' +
+                                     '-<div>' +
+                                     '--ponk');
+  });
+
 });
