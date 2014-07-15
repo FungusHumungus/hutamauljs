@@ -32,4 +32,12 @@ describe('Parser', function() {
 
   });
 
+  it('returns an effective length that ignores tags', function() {
+
+      var ast = parser('<div>ook<span>ponk</span>');
+
+      expect(ast.effectiveLength()).toEqual(7);
+
+  });
+
 });
