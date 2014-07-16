@@ -2,41 +2,60 @@ describe('Parser', function() {
 
   var parser = require('../lib/parser');
 
-  it('parses a div block', function() {
+  describe('when parsing', function() {
 
-    var ast = parser('<div>ook</div>');
+    it('parses a div block', function() {
 
-    expect(ast.toString()).toEqual('-<div>' + 
-                                   '--ook');
-  });
+        var ast = parser('<div>ook</div>');
 
-  it('parses multiple div blocks', function() {
+        expect(ast.toString()).toEqual('-<div>' + 
+                                    '--ook');
+    });
 
-      var ast = parser('<div>ook</div><div>ponk</div>');
+    it('parses multiple div blocks', function() {
 
-      expect(ast.toString()).toEqual('-<div>' + 
-                                     '--ook' +
-                                     '-<div>' +
-                                     '--ponk');
-  });
+        var ast = parser('<div>ook</div><div>ponk</div>');
 
-  it('parses multiple nodes per branch', function() {
-      
-      var ast = parser('<div>ook<span>ponk</span>wonkle</div>');
+        expect(ast.toString()).toEqual('-<div>' + 
+                                        '--ook' +
+                                        '-<div>' +
+                                        '--ponk');
+    });
 
-      expect(ast.toString()).toEqual('-<div>' + 
-                                     '--ook' + 
-                                     '--<span>' +
-                                     '---ponk' +
-                                     '--wonkle');
+    it('parses multiple nodes per branch', function() {
+        
+        var ast = parser('<div>ook<span>ponk</span>wonkle</div>');
 
-  });
+        expect(ast.toString()).toEqual('-<div>' + 
+                                        '--ook' + 
+                                        '--<span>' +
+                                        '---ponk' +
+                                        '--wonkle');
 
-  it('returns an effective length that ignores tags', function() {
+    });
 
-      var ast = parser('<div>ook<span>ponk</span>');
+  });  
 
-      expect(ast.effectiveLength()).toEqual(7);
+  describe('when splitting', function() {
+
+      it ('splits the text when told to', function() {
+
+        var splitter = {
+            split: function(token) {
+                if (token.text === 'ponk') 
+                    return 'po..';
+
+                return null;
+            }
+        };
+
+        var ast = parser('<div>ook<span>ponk</span>', splitter);
+
+        expect(ast.toString()).toEqual('-<div>' + 
+                                       '--ook' +
+                                       '--<span>' +
+                                       '---po..');
+      });
 
   });
 
