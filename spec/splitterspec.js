@@ -25,4 +25,16 @@ describe("splitter", function() {
         expect(b).toBe('ook ...'); 
     });
 
+    it("splits at line when configured to", function() {
+
+        var splitter = new Splitter(13, {default: 'line'});
+
+        var a = splitter.split({text: 'ook ook ook', effectiveLength: function() { return 11; }});
+        expect(a).toBe(null);
+
+        var b = splitter.split({text: 'ook ook\nook', effectiveLength: function() { return 11; }});
+        expect(b).toBe('ook ook\n...'); 
+
+    });
+
 });

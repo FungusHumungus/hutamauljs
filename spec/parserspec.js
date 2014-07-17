@@ -59,4 +59,15 @@ describe('Parser', function() {
 
   });
 
+  describe('when returning html', function() {
+
+      it ('returns unclosed tags with a closing tag', function() {
+          
+          var ast = parser('<div>ook<span>porkwonkle');
+
+          expect(ast.toHtml()).toEqual('<div>ook<span>porkwonkle</span></div>');
+      });
+
+  });
+
 });
