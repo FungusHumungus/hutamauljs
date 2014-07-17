@@ -12,7 +12,7 @@ describe('Hutamaul', function() {
                              '10 print "I am awesome"\n' +
                              '20 goto 10\n' +
                              '</pre>' +
-                             '</div>', 30, {default: 'line'});
+                             '</div>', 30, {pre: 'line'});
 
         expect(split).toBe('<div class="womble">This is some awesome code:\n' +
                            '<pre>\n' + 
