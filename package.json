@@ -11,5 +11,16 @@
   "devDependencies": {
     "gulp": "^3.8.6",
     "gulp-jasmine": "^0.2.0"
+  },
+  "main": "./lib/hutamaul",
+  "keywords": ["html", "split", "excerpt"],
+  "files": [
+      "lib",
+      "LICENSE",
+      "README.md"
+      ],
+  "license": "MIT",
+  "scripts": {
+    "test": "./node_modules/gulp/bin/gulp jasmine"
   }
 }
